@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuenta Regresiva: 20 de Junio</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #0f172a;
+            color: #f8fafc;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 30px;
+            color: #38bdf8;
+        }
+
+        #countdown {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .time-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 12px;
+            min-width: 100px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .number {
+            display: block;
+            font-size: 3rem;
+            font-weight: 800;
+        }
+
+        .label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #94a3b8;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 id="title">Tiempo para el 20 de Junio</h1>
+        <div id="countdown">
+            <div class="time-box"><span class="number" id="days">00</span><span class="label">Días</span></div>
+            <div class="time-box"><span class="number" id="hours">00</span><span class="label">Horas</span></div>
+            <div class="time-box"><span class="number" id="minutes">00</span><span class="label">Minutos</span></div>
+            <div class="time-box"><span class="number" id="seconds">00</span><span class="label">Segundos</span></div>
+        </div>
+    </div>
+
+    <script>
+        // CONFIGURACIÓN: 20 de Junio de 2026
+        const countdownDate = new Date("Jun 20, 2026 00:00:00").getTime();
+
+        const x = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = countdownDate - now;
+
+            const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = d;
+            document.getElementById("hours").innerText = h;
+            document.getElementById("minutes").innerText = m;
+            document.getElementById("seconds").innerText = s;
+
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("title").innerText = "¡LLEGÓ EL DÍA!";
+                document.getElementById("countdown").style.display = "none";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
